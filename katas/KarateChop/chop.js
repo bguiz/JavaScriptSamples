@@ -3,25 +3,22 @@ function chop(value, values) {
 	var length = values.length;
 
 	var l = length;
+	var top = l;
+	var bottom = 0;
 	var pos = Math.floor(l / 2);
-	var delta = pos;
 
-	while (pos >= 0 && pos < length) {
+	while (bottom <= top) {
 		var newvalue = values[pos];
 
 		if (value == newvalue)
 			return pos;
 
-		if (delta == 0)
-			return -1;
-
-		delta = Math.floor(delta / 2);
-		l = pos;
-
 		if (value < newvalue)
-			pos = pos - (delta ? delta : 1);
+			top = pos - 1;
 		else
-			pos = pos + (delta ? delta : 1);
+			bottom = pos + 1;
+
+		pos = bottom + Math.floor((top - bottom)/2);
 	}
 
 	return -1;
