@@ -19,3 +19,18 @@ exports['first numbers one digit'] = function (test) {
     test.equal(nums(8), 'eight');
     test.equal(nums(9), 'nine');
 };
+
+exports['first numbers two digits'] = function (test) {
+    test.equal(nums(10), 'ten');
+    test.equal(nums(11), 'eleven');
+    test.equal(nums(12), 'twelve');
+    test.equal(nums(13), 'thirteen');
+    test.equal(nums(14), 'fourteen');
+    test.equal(nums(15), 'fifteen');
+    test.equal(nums(16), 'sixteen');
+    test.equal(nums(17), 'seventeen');
+    test.equal(nums(18), 'eighteen');
+    test.equal(nums(19), 'nineteen');
+    test.equal(nums(20), 'twenty');
+};
+
