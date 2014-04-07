@@ -26,6 +26,12 @@ values[19] = 'nineteen';
 values[20] = 'twenty';
 
 function nums(value) {
+    if (value > 20) {
+        var decvalue = Math.floor(value / 10) * 10;
+        var restvalue = value % decvalue;
+        return values[decvalue] + '-' + values[restvalue];
+    }
+    
     return values[value];
 }
 

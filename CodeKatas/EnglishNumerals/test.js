@@ -34,3 +34,16 @@ exports['first numbers two digits'] = function (test) {
     test.equal(nums(20), 'twenty');
 };
 
+exports['numbers 20 to 29'] = function (test) {
+    test.equal(nums(20), 'twenty');
+    test.equal(nums(21), 'twenty-one');
+    test.equal(nums(22), 'twenty-two');
+    test.equal(nums(23), 'twenty-three');
+    test.equal(nums(24), 'twenty-four');
+    test.equal(nums(25), 'twenty-five');
+    test.equal(nums(26), 'twenty-six');
+    test.equal(nums(27), 'twenty-seven');
+    test.equal(nums(28), 'twenty-eight');
+    test.equal(nums(29), 'twenty-nine');
+};
+
