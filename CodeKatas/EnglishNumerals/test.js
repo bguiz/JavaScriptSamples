@@ -47,3 +47,17 @@ exports['numbers 20 to 29'] = function (test) {
     test.equal(nums(29), 'twenty-nine');
 };
 
+exports['numbers 30 to 39'] = function (test) {
+    test.equal(nums(30), 'thirty');
+    test.equal(nums(31), 'thirty-one');
+    test.equal(nums(32), 'thirty-two');
+    test.equal(nums(33), 'thirty-three');
+    test.equal(nums(34), 'thirty-four');
+    test.equal(nums(35), 'thirty-five');
+    test.equal(nums(36), 'thirty-six');
+    test.equal(nums(37), 'thirty-seven');
+    test.equal(nums(38), 'thirty-eight');
+    test.equal(nums(39), 'thirty-nine');
+};
+
+

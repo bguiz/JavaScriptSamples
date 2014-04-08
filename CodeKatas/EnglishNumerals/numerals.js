@@ -24,11 +24,16 @@ values[18] = 'eighteen';
 values[19] = 'nineteen';
 
 values[20] = 'twenty';
+values[30] = 'thirty';
 
 function nums(value) {
-    if (value > 20) {
+    if (value >= 20) {
         var decvalue = Math.floor(value / 10) * 10;
         var restvalue = value % decvalue;
+        
+        if (!restvalue)
+            return values[decvalue];
+            
         return values[decvalue] + '-' + values[restvalue];
     }
     
