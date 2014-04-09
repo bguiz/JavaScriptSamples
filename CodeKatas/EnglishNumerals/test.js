@@ -86,4 +86,55 @@ exports['numbers 50 to 59'] = function (test) {
     test.equal(nums(59), 'fifty-nine');
 };
 
+exports['numbers 60 to 69'] = function (test) {
+    test.equal(nums(60), 'sixty');
+    test.equal(nums(61), 'sixty-one');
+    test.equal(nums(62), 'sixty-two');
+    test.equal(nums(63), 'sixty-three');
+    test.equal(nums(64), 'sixty-four');
+    test.equal(nums(65), 'sixty-five');
+    test.equal(nums(66), 'sixty-six');
+    test.equal(nums(67), 'sixty-seven');
+    test.equal(nums(68), 'sixty-eight');
+    test.equal(nums(69), 'sixty-nine');
+};
+
+exports['numbers 70 to 79'] = function (test) {
+    test.equal(nums(70), 'seventy');
+    test.equal(nums(71), 'seventy-one');
+    test.equal(nums(72), 'seventy-two');
+    test.equal(nums(73), 'seventy-three');
+    test.equal(nums(74), 'seventy-four');
+    test.equal(nums(75), 'seventy-five');
+    test.equal(nums(76), 'seventy-six');
+    test.equal(nums(77), 'seventy-seven');
+    test.equal(nums(78), 'seventy-eight');
+    test.equal(nums(79), 'seventy-nine');
+};
+
+exports['numbers 80 to 89'] = function (test) {
+    test.equal(nums(80), 'eighty');
+    test.equal(nums(81), 'eighty-one');
+    test.equal(nums(82), 'eighty-two');
+    test.equal(nums(83), 'eighty-three');
+    test.equal(nums(84), 'eighty-four');
+    test.equal(nums(85), 'eighty-five');
+    test.equal(nums(86), 'eighty-six');
+    test.equal(nums(87), 'eighty-seven');
+    test.equal(nums(88), 'eighty-eight');
+    test.equal(nums(89), 'eighty-nine');
+};
+
+exports['numbers 90 to 99'] = function (test) {
+    test.equal(nums(90), 'ninety');
+    test.equal(nums(91), 'ninety-one');
+    test.equal(nums(92), 'ninety-two');
+    test.equal(nums(93), 'ninety-three');
+    test.equal(nums(94), 'ninety-four');
+    test.equal(nums(95), 'ninety-five');
+    test.equal(nums(96), 'ninety-six');
+    test.equal(nums(97), 'ninety-seven');
+    test.equal(nums(98), 'ninety-eight');
+    test.equal(nums(99), 'ninety-nine');
+};
 

@@ -27,6 +27,10 @@ values[20] = 'twenty';
 values[30] = 'thirty';
 values[40] = 'forty';
 values[50] = 'fifty';
+values[60] = 'sixty';
+values[70] = 'seventy';
+values[80] = 'eighty';
+values[90] = 'ninety';
 
 function nums(value) {
     if (value >= 20) {
