@@ -138,3 +138,23 @@ exports['numbers 90 to 99'] = function (test) {
     test.equal(nums(99), 'ninety-nine');
 };
 
+exports['hundreds'] = function (test) {
+    test.equal(nums(100), 'one hundred');
+    test.equal(nums(200), 'two hundred');
+    test.equal(nums(300), 'three hundred');
+    test.equal(nums(400), 'four hundred');
+    test.equal(nums(500), 'five hundred');
+    test.equal(nums(600), 'six hundred');
+    test.equal(nums(700), 'seven hundred');
+    test.equal(nums(800), 'eight hundred');
+    test.equal(nums(900), 'nine hundred');
+};
+
+exports['one hundred first numbers'] = function (test) {
+    test.equal(nums(101), 'one hundred one');
+    test.equal(nums(110), 'one hundred ten');
+    test.equal(nums(115), 'one hundred fifteen');
+    test.equal(nums(120), 'one hundred twenty');
+    test.equal(nums(121), 'one hundred twenty-one');
+    test.equal(nums(132), 'one hundred thirty-two');
+};
