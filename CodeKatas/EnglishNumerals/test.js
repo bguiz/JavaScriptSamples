@@ -158,3 +158,21 @@ exports['one hundred first numbers'] = function (test) {
     test.equal(nums(121), 'one hundred twenty-one');
     test.equal(nums(132), 'one hundred thirty-two');
 };
+
+exports['two hundred first numbers'] = function (test) {
+    test.equal(nums(201), 'two hundred one');
+    test.equal(nums(210), 'two hundred ten');
+    test.equal(nums(215), 'two hundred fifteen');
+    test.equal(nums(220), 'two hundred twenty');
+    test.equal(nums(221), 'two hundred twenty-one');
+    test.equal(nums(232), 'two hundred thirty-two');
+};
+
+exports['three hundred first numbers'] = function (test) {
+    test.equal(nums(301), 'three hundred one');
+    test.equal(nums(311), 'three hundred eleven');
+    test.equal(nums(316), 'three hundred sixteen');
+    test.equal(nums(325), 'three hundred twenty-five');
+    test.equal(nums(331), 'three hundred thirty-one');
+    test.equal(nums(342), 'three hundred forty-two');
+};
