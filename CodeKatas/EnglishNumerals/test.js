@@ -176,3 +176,23 @@ exports['three hundred first numbers'] = function (test) {
     test.equal(nums(331), 'three hundred thirty-one');
     test.equal(nums(342), 'three hundred forty-two');
 };
+
+exports['thousand'] = function (test) {
+    test.equal(nums(1000), 'one thousand');
+    test.equal(nums(2000), 'two thousand');
+    test.equal(nums(3000), 'three thousand');
+    test.equal(nums(4000), 'four thousand');
+    test.equal(nums(5000), 'five thousand');
+    test.equal(nums(6000), 'six thousand');
+    test.equal(nums(7000), 'seven thousand');
+    test.equal(nums(8000), 'eight thousand');
+    test.equal(nums(9000), 'nine thousand');
+};
+
+exports['thousand something'] = function (test) {
+    test.equal(nums(1001), 'one thousand one');
+    test.equal(nums(2011), 'two thousand eleven');
+    test.equal(nums(3040), 'three thousand forty');
+    test.equal(nums(4120), 'four thousand one hundred twenty');
+};
+

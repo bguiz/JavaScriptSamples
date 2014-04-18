@@ -33,6 +33,16 @@ values[80] = 'eighty';
 values[90] = 'ninety';
 
 function nums(value) {
+    if (value >= 1000) {
+        var thvalue = Math.floor(value / 1000);
+        var restvalue = value % 1000;
+        
+        if (restvalue == 0)
+            return nums(thvalue) + ' thousand';
+        
+        return nums(thvalue) + ' thousand ' + nums(restvalue);
+    }
+    
     if (value && value % 100 == 0)
         return nums(Math.floor(value / 100)) + ' hundred';
         
