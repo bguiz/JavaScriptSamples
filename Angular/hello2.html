@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Hello AngularJS</title>
+    <link href='app.css' rel='stylesheet' />
+</head>
+<body ng-app='myApp'>
+    <h1>Hello AngularJS</h1>
+    <div ng-controller='FirstCtrl' class='scope'>
+        <input type='text' ng-model='model.firstName' />
+        <div>{{model.firstName}}</div>
+        <button ng-click='clickMe(model.firstName)'>Click Me</button>
+    </div>
+    <div ng-controller='FirstCtrl' class='scope'>
+        <input type='text' ng-model='model.firstName' />
+        <div>{{model.firstName}}</div>
+        <button ng-click='clickMe(model.firstName)'>Click Me</button>
+    </div>
+    <script src='angular.js'></script>
+    <script src='app.js'></script>
+</body>
+</html>
