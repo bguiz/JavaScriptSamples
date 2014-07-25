@@ -5,7 +5,7 @@ function getFriends(users) {
     users.forEach(function (user) {
         if (!user.friends)
             return;
-        friends = friends.concat(user.friends);
+        union(friends, user.friends);
     });
     
     return friends;
@@ -27,6 +27,13 @@ function friendsOf(user) {
     }
         
     return result;
+}
+
+function union(friends, newfriends) {
+    newfriends.forEach(function (newfriend) {
+        if (friends.indexOf(newfriend) < 0)
+            friends.push(newfriend);
+    });
 }
 
 function remove(friends, oldfriends) {
