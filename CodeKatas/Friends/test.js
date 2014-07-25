@@ -20,3 +20,22 @@ exports['only one friend'] = function (test) {
     test.equal(result[0].length, 1);
     test.strictEqual(result[0][0], eve);
 };
+
+exports['friend of a friend'] = function (test) {
+    var abel = { name: 'Abel' };
+    var eve = { name: 'Eve', friends: [ abel ] };
+    var adam = { name: 'Adam', friends: [ eve ] };
+    
+    var result = friends.friendsOf(adam);
+    test.ok(result);
+    test.ok(Array.isArray(result));
+    test.equal(result.length, 2);
+
+    test.ok(Array.isArray(result[0]));
+    test.equal(result[0].length, 1);
+    test.strictEqual(result[0][0], eve);
+
+    test.ok(Array.isArray(result[1]));
+    test.equal(result[1].length, 1);
+    test.strictEqual(result[1][0], abel);
+};
