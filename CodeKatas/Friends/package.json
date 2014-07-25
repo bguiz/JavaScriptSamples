@@ -1,0 +1,13 @@
+{
+  "name": "Friends",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "simpleunit ./test.js"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "simpleunit": "0.0.4"
+  }
+}
