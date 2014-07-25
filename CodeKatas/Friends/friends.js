@@ -1,6 +1,9 @@
 
 function friendsOf(user) {
-    return [];
+    if (!user.friends)
+        return [];
+        
+    return [user.friends];
 }
 
 module.exports = {
