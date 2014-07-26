@@ -28,20 +28,16 @@ exports['friend of a friend'] = function (test) {
     equals(test, result, [abel]);
 };
 
-function equals(test, generations, expected) {
-    test.ok(generations);
+function equals(test, items, expected) {
+    test.ok(items);
     test.ok(expected);
-    test.ok(Array.isArray(generations));
+    test.ok(Array.isArray(items));
     test.ok(Array.isArray(expected));
-    test.equal(generations.length, expected.length);
+    test.equal(items.length, expected.length);
     
-    for (var n in generations) {
-        var value = generations[n];
-        var expectedvalue = expected[n];
-        
-        if (Array.isArray(value))
-            equals(test, value, expectedvalue);
-        else
-            test.strictEqual(value, expectedvalue);
+    for (var n in items) {
+        var item = items[n];
+        var expecteditem = expected[n];
+        test.strictEqual(item, expecteditem);
     }
 }
