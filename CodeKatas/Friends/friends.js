@@ -11,19 +11,23 @@ function getFriends(users) {
     return friends;
 }
 
+function nextFriends(friends) {
+    var newfriends = getFriends(friends[friends.length - 1]);
+    
+    friends.forEach(function (oldfriends) {
+        newfriends = remove(newfriends, oldfriends);
+    });
+    
+    return newfriends;
+}
+
 function friendsOf(user) {
-    var friends = getFriends([user]);
-    var result = [];
+    var result = [[user]];
+    var friends = nextFriends(result);
     
     while (friends.length) {
         result.push(friends);
-        friends = getFriends(friends);
-        
-        result.forEach(function (oldfriends) {
-            friends = remove(friends, oldfriends);
-        });
-        
-        friends = remove(friends, [user]);
+        friends = nextFriends(result);
     }
         
     return result;
@@ -48,6 +52,7 @@ function remove(friends, oldfriends) {
 }
 
 module.exports = {
-    friendsOf: friendsOf
+    friendsOf: friendsOf,
+    nextFriends: nextFriends
 }
 
