@@ -5,14 +5,8 @@ exports['friends of user without friends'] = function (test) {
     var adam = { name: 'Adam' };
     
     var result = friends.friendsOf(adam);
-    
-    test.ok(result);
-    test.ok(Array.isArray(result));
-    test.equal(result.length, 1);
-    
-    test.ok(Array.isArray(result[0]));
-    test.equal(result[0].length, 1);
-    test.strictEqual(result[0][0], adam);
+
+    equals(test, result, [[adam]]);
 };
 
 exports['only one friend'] = function (test) {
@@ -20,18 +14,8 @@ exports['only one friend'] = function (test) {
     var adam = { name: 'Adam', friends: [ eve ] };
     
     var result = friends.friendsOf(adam);
-    
-    test.ok(result);
-    test.ok(Array.isArray(result));
-    test.equal(result.length, 2);
-    
-    test.ok(Array.isArray(result[0]));
-    test.equal(result[0].length, 1);
-    test.strictEqual(result[0][0], adam);
-    
-    test.ok(Array.isArray(result[1]));
-    test.equal(result[1].length, 1);
-    test.strictEqual(result[1][0], eve);
+
+    equals(test, result, [[adam], [eve]]);
 };
 
 exports['friend of a friend'] = function (test) {
@@ -40,21 +24,8 @@ exports['friend of a friend'] = function (test) {
     var adam = { name: 'Adam', friends: [ eve ] };
     
     var result = friends.friendsOf(adam);
-    test.ok(result);
-    test.ok(Array.isArray(result));
-    test.equal(result.length, 3);
     
-    test.ok(Array.isArray(result[0]));
-    test.equal(result[0].length, 1);
-    test.strictEqual(result[0][0], adam);
-
-    test.ok(Array.isArray(result[1]));
-    test.equal(result[1].length, 1);
-    test.strictEqual(result[1][0], eve);
-
-    test.ok(Array.isArray(result[2]));
-    test.equal(result[2].length, 1);
-    test.strictEqual(result[2][0], abel);
+    equals(test, result, [[adam], [eve], [abel]]);
 };
 
 exports['friend of a friend with cycle'] = function (test) {
@@ -65,22 +36,8 @@ exports['friend of a friend with cycle'] = function (test) {
     abel.friends = [ adam ];
     
     var result = friends.friendsOf(adam);
-    
-    test.ok(result);
-    test.ok(Array.isArray(result));
-    test.equal(result.length, 3);
-    
-    test.ok(Array.isArray(result[0]));
-    test.equal(result[0].length, 1);
-    test.strictEqual(result[0][0], adam);
 
-    test.ok(Array.isArray(result[1]));
-    test.equal(result[1].length, 1);
-    test.strictEqual(result[1][0], eve);
-
-    test.ok(Array.isArray(result[2]));
-    test.equal(result[2].length, 1);
-    test.strictEqual(result[2][0], abel);
+    equals(test, result, [[adam], [eve], [abel]]);
 };
 
 exports['friend of a friend with repetition'] = function (test) {
@@ -91,20 +48,23 @@ exports['friend of a friend with repetition'] = function (test) {
     
     var result = friends.friendsOf(adam);
     
-    test.ok(result);
-    test.ok(Array.isArray(result));
-    test.equal(result.length, 3);
-    
-    test.ok(Array.isArray(result[0]));
-    test.equal(result[0].length, 1);
-    test.strictEqual(result[0][0], adam);
-
-    test.ok(Array.isArray(result[1]));
-    test.equal(result[1].length, 2);
-    test.strictEqual(result[1][0], eve);
-    test.strictEqual(result[1][1], abel);
-
-    test.ok(Array.isArray(result[2]));
-    test.equal(result[2].length, 1);
-    test.strictEqual(result[2][0], caine);
+    equals(test, result, [[adam], [eve, abel], [caine]]);
 };
+
+function equals(test, generations, expected) {
+    test.ok(generations);
+    test.ok(expected);
+    test.ok(Array.isArray(generations));
+    test.ok(Array.isArray(expected));
+    test.equal(generations.length, expected.length);
+    
+    for (var n in generations) {
+        var value = generations[n];
+        var expectedvalue = expected[n];
+        
+        if (Array.isArray(value))
+            equals(test, value, expectedvalue);
+        else
+            test.strictEqual(value, expectedvalue);
+    }
+}
