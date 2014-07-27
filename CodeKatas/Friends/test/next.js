@@ -6,7 +6,7 @@ exports['next friends of user without friends'] = function (test) {
     
     var result = friends.nextFriends([[adam]]);
  
-    equals(test, result, []);
+    test.deepEqual(result, []);
 };
 
 exports['next friends of user with only one friend'] = function (test) {
@@ -15,7 +15,7 @@ exports['next friends of user with only one friend'] = function (test) {
     
     var result = friends.nextFriends([[adam]]);
  
-    equals(test, result, [eve]);
+    test.deepEqual(result, [eve]);
 };
 
 exports['friend of a friend'] = function (test) {
@@ -25,19 +25,6 @@ exports['friend of a friend'] = function (test) {
     
     var result = friends.nextFriends([[adam], [eve]]);
     
-    equals(test, result, [abel]);
+    test.deepEqual(result, [abel]);
 };
 
-function equals(test, items, expected) {
-    test.ok(items);
-    test.ok(expected);
-    test.ok(Array.isArray(items));
-    test.ok(Array.isArray(expected));
-    test.equal(items.length, expected.length);
-    
-    for (var n in items) {
-        var item = items[n];
-        var expecteditem = expected[n];
-        test.strictEqual(item, expecteditem);
-    }
-}

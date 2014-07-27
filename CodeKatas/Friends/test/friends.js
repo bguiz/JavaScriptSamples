@@ -6,7 +6,7 @@ exports['friends of user without friends'] = function (test) {
     
     var result = friends.friendsOf(adam);
 
-    equals(test, result, [[adam]]);
+    test.deepEqual(result, [[adam]]);
 };
 
 exports['only one friend'] = function (test) {
@@ -15,7 +15,7 @@ exports['only one friend'] = function (test) {
     
     var result = friends.friendsOf(adam);
 
-    equals(test, result, [[adam], [eve]]);
+    test.deepEqual(result, [[adam], [eve]]);
 };
 
 exports['friend of a friend'] = function (test) {
@@ -25,7 +25,7 @@ exports['friend of a friend'] = function (test) {
     
     var result = friends.friendsOf(adam);
     
-    equals(test, result, [[adam], [eve], [abel]]);
+    test.deepEqual(result, [[adam], [eve], [abel]]);
 };
 
 exports['friend of a friend with cycle'] = function (test) {
@@ -37,7 +37,7 @@ exports['friend of a friend with cycle'] = function (test) {
     
     var result = friends.friendsOf(adam);
 
-    equals(test, result, [[adam], [eve], [abel]]);
+    test.deepEqual(result, [[adam], [eve], [abel]]);
 };
 
 exports['friend of a friend with repetition'] = function (test) {
@@ -48,23 +48,6 @@ exports['friend of a friend with repetition'] = function (test) {
     
     var result = friends.friendsOf(adam);
     
-    equals(test, result, [[adam], [eve, abel], [caine]]);
+    test.deepEqual(result, [[adam], [eve, abel], [caine]]);
 };
 
-function equals(test, generations, expected) {
-    test.ok(generations);
-    test.ok(expected);
-    test.ok(Array.isArray(generations));
-    test.ok(Array.isArray(expected));
-    test.equal(generations.length, expected.length);
-    
-    for (var n in generations) {
-        var value = generations[n];
-        var expectedvalue = expected[n];
-        
-        if (Array.isArray(value))
-            equals(test, value, expectedvalue);
-        else
-            test.strictEqual(value, expectedvalue);
-    }
-}
