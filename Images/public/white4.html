@@ -1,0 +1,74 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Load Image - Detect White</h1>
+<canvas id="imagecanvas">
+</canvas>
+<script>
+var image = new Image();
+var canvas = document.getElementById('imagecanvas');
+var image_data;
+image.onload = function () { 
+    canvas.width = image.width;
+    canvas.height = image.height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    image_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    for (var k = 0; k < image_data.data.length; k += 4) {
+        var r = image_data.data[k];
+        var g = image_data.data[k + 1];
+        var b = image_data.data[k + 2];
+        
+        if (detectColor(150, 255, 30, r, g, b)) {
+            image_data.data[k] = 255;
+            image_data.data[k + 1] = 0;
+            image_data.data[k + 2] = 0;
+        }
+        else if (detectColor(0, 150, 20, r, g, b)) {
+            image_data.data[k] = 0;
+            image_data.data[k + 1] = 0;
+            image_data.data[k + 2] = 255;
+        }
+/*
+        if (image_data.data[k] >= 200 && image_data.data[k + 1] >= 200 && image_data.data[k + 2] >= 200) {
+            image_data.data[k] = 255;
+            image_data.data[k + 1] = 0;
+            image_data.data[k + 2] = 0;
+        }
+        else if (image_data.data[k] <= 30 && image_data.data[k + 1] <= 30 && image_data.data[k + 2] <= 30) {
+            image_data.data[k] = 0;
+            image_data.data[k + 1] = 0;
+            image_data.data[k + 2] = 255;
+        }
+*/
+    }
+        
+    ctx.putImageData(image_data, 0, 0);
+}
+
+image.src = 'images/set1_04.jpg';
+
+function detectColor(from, to, percentage, r, g, b) {
+    if (r < from || r > to)
+        return false;
+    if (g < from || g > to)
+        return false;
+    if (b < from || b > to)
+        return false;
+        
+    if (r > g * (1 + percentage / 100) || r < g * (1 - percentage / 100))
+        return false;
+    if (g > b * (1 + percentage / 100) || g < b * (1 - percentage / 100))
+        return false;
+    if (b > r * (1 + percentage / 100) || b < r * (1 - percentage / 100))
+        return false;
+        
+    return true;
+}
+
+
+</script>
+</body>
+</html>

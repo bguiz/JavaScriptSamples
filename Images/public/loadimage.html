@@ -8,11 +8,13 @@
 <script>
 var image = new Image();
 var canvas = document.getElementById('imagecanvas');
+var image_data;
 image.onload = function () { 
     canvas.width = image.width;
     canvas.height = image.height;
     var ctx = canvas.getContext('2d');
     ctx.drawImage(image, 0, 0);
+    image_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 image.src = 'images/set1_01.jpg';
 </script>
