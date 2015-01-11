@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Load Image</h1>
+<canvas id="imagecanvas">
+</canvas>
+<script>
+var image = new Image();
+var canvas = document.getElementById('imagecanvas');
+image.onload = function () { 
+    canvas.width = image.width;
+    canvas.height = image.height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+}
+image.src = 'images/set1_01.jpg';
+</script>
+</body>
+</html>

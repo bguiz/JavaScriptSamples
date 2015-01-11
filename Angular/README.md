@@ -12,6 +12,10 @@
 - [AngularJS–Part 3, Inheritance](http://lostechies.com/gabrielschenker/2013/12/10/angularjspart-3-inheritance/)
 - [Scalable code organization in AngularJS](https://medium.com/opinionated-angularjs/scalable-code-organization-in-angularjs-9f01b594bf06)
 - [Comprehensive Beginner’s Guide to AngularJS](http://antjanus.com/blog/web-development-tutorials/front-end-development/comprehensive-beginner-guide-angularjs/)
+- [AngularJS Tutorial](http://www.w3schools.com/angular/)
+- [A Step-by-Step Guide to Your First AngularJS App](http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app)
+- [Learn AngularJS With These 5 Practical Examples](http://tutorialzine.com/2013/08/learn-angularjs-5-examples/)
+- [Introduction to Angular.js in 50 Examples (part 1)](https://www.youtube.com/watch?v=TRrL5j3MIvo)
 
 ### Others
 
