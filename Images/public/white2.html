@@ -1,5 +1,7 @@
 <html>
 <head>
+<script src="/js/simplega.js" language="javascript"></script>
+<script src="/js/zones.js" language="javascript"></script>
 </head>
 <body>
 <h1>Load Image - Detect White</h1>
@@ -9,6 +11,11 @@
 var image = new Image();
 var canvas = document.getElementById('imagecanvas');
 var image_data;
+
+var engine;
+var bestgenotype;
+var bestvalue;
+
 image.onload = function () { 
     canvas.width = image.width;
     canvas.height = image.height;
@@ -26,26 +33,18 @@ image.onload = function () {
             image_data.data[k + 1] = 0;
             image_data.data[k + 2] = 0;
         }
-        else if (detectColor(0, 150, 20, r, g, b)) {
+        else if (detectColor(0, 150, 20, r, g, b) || r + g + b < 50) {
             image_data.data[k] = 0;
             image_data.data[k + 1] = 0;
             image_data.data[k + 2] = 255;
         }
-/*
-        if (image_data.data[k] >= 200 && image_data.data[k + 1] >= 200 && image_data.data[k + 2] >= 200) {
-            image_data.data[k] = 255;
-            image_data.data[k + 1] = 0;
-            image_data.data[k + 2] = 0;
-        }
-        else if (image_data.data[k] <= 30 && image_data.data[k + 1] <= 30 && image_data.data[k + 2] <= 30) {
-            image_data.data[k] = 0;
-            image_data.data[k + 1] = 0;
-            image_data.data[k + 2] = 255;
-        }
-*/
     }
         
     ctx.putImageData(image_data, 0, 0);
+    
+    var img = Zones.image(image_data.data, canvas.width, canvas.height);
+    
+    runga(img);
 }
 
 image.src = 'images/set1_02.jpg';
@@ -68,6 +67,55 @@ function detectColor(from, to, percentage, r, g, b) {
     return true;
 }
 
+function drawRectangle(x, y, w, h) {
+    var ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "yellow";
+    ctx.rect(x, y, w, h);
+    ctx.stroke();
+    ctx.closePath();
+}
+
+function runGeneration() {
+    var newgenotypes = engine.nextPopulation();
+    best = simplega.getBestGenotype(newgenotypes);
+    var value = best.evaluate();
+    
+    if (!bestgenotype || bestvalue > value) {
+        bestgenotype = best;
+        bestvalue = value;
+    }
+    
+    if (best) {
+        drawRectangle(best.x(), best.y(), best.width(), best.height());
+     
+        newgenotypes.forEach(function(genotype) {
+            if (genotype.evaluate() > value * 0.1)
+                drawRectangle(genotype.x(), genotype.y(), genotype.width(), genotype.height());
+        });
+    }
+        
+    setTimeout(runGeneration, 10);
+}
+
+function runga(image) {
+    var genotypes = [];
+    
+    for (var k = 0; k < 1000; k++)
+        genotypes.push(Zones.rectangle(image));
+    
+    var mutators = [];
+
+    for (var k = 0; k < 4; k++)
+        mutators.push(Zones.mutator());
+
+    engine = new simplega.Engine();
+    engine.setPopulation(genotypes);
+    engine.setMutators(mutators);
+    
+    runGeneration();
+}
 
 </script>
 </body>

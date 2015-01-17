@@ -52,13 +52,17 @@ var Zones = (function () {
             
             var value = redcount;
             
-            if (bluecount > 0 && bluecount < redcount / 3)
-                value = (value + bluecount) * 1.5;
+            if (bluecount > 0 && bluecount < redcount / 3) {
+                value = redcount * bluecount;
+                
+                if (size - redcount - bluecount > 0)
+                    value /= size - redcount - bluecount;
+            }
                 
             if (redcount > size / 2)
                 value *= 2;
                 
-            if (width > height)
+            if (width > height * 1.5)
                 value *= 1.5;
                 
             return value;

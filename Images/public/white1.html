@@ -33,7 +33,7 @@ image.onload = function () {
             image_data.data[k + 1] = 0;
             image_data.data[k + 2] = 0;
         }
-        else if (detectColor(0, 150, 20, r, g, b)) {
+        else if (detectColor(0, 150, 20, r, g, b) || r + g + b < 50) {
             image_data.data[k] = 0;
             image_data.data[k + 1] = 0;
             image_data.data[k + 2] = 255;
@@ -43,10 +43,6 @@ image.onload = function () {
     ctx.putImageData(image_data, 0, 0);
     
     var img = Zones.image(image_data.data, canvas.width, canvas.height);
-    alert(img.count(255, 0, 0, 0, 0, canvas.width, canvas.height / 2));
-    alert(img.count(255, 0, 0, 0, canvas.height / 2, canvas.width, canvas.height / 2));
-    alert(img.count(0, 0, 255, 0, 0, canvas.width, canvas.height));
-    alert(img.count(0, 0, 0, 0, 0, canvas.width, canvas.height));
     
     runga(img);
 }
@@ -75,7 +71,7 @@ function drawRectangle(x, y, w, h) {
     var ctx = canvas.getContext('2d');
     ctx.beginPath();
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "green";
+    ctx.strokeStyle = "yellow";
     ctx.rect(x, y, w, h);
     ctx.stroke();
     ctx.closePath();
@@ -91,10 +87,16 @@ function runGeneration() {
         bestvalue = value;
     }
     
-    if (best)
+    if (best) {
         drawRectangle(best.x(), best.y(), best.width(), best.height());
+     
+        newgenotypes.forEach(function(genotype) {
+            if (genotype.evaluate() > value * 0.1)
+                drawRectangle(genotype.x(), genotype.y(), genotype.width(), genotype.height());
+        });
+    }
         
-    setTimeout(runGeneration, 1000);
+    setTimeout(runGeneration, 10);
 }
 
 function runga(image) {
