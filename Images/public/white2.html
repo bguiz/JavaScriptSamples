@@ -88,10 +88,12 @@ function runGeneration() {
     }
     
     if (best) {
+        var ctx = canvas.getContext("2d");
+        ctx.putImageData(image_data, 0, 0);
         drawRectangle(best.x(), best.y(), best.width(), best.height());
      
         newgenotypes.forEach(function(genotype) {
-            if (genotype.evaluate() > value * 0.1)
+            if (genotype.evaluate() > value * 0.3)
                 drawRectangle(genotype.x(), genotype.y(), genotype.width(), genotype.height());
         });
     }

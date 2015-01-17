@@ -48,6 +48,12 @@ var Zones = (function () {
         this.evaluate = function () {
             var redcount = this.count(255, 0, 0);
             var bluecount = this.count(0, 0, 255);
+            
+            var redborder = image.count(255, 0, 0, x, y, width, 1)
+                + image.count(255, 0, 0, x, y, 1, height)
+                + image.count(255, 0, 0, x + width - 1, y, 1, height)
+                + image.count(255, 0, 0, x, y + height - 1, width, 1);
+            
             var size = width * height;
             
             var value = redcount;
@@ -64,6 +70,15 @@ var Zones = (function () {
                 
             if (width > height * 1.5)
                 value *= 1.5;
+            
+            value = redborder / ((width + height) * 2 + 1);
+            // if (redborder > (width + height) * 2 * 0.8)
+                // value *= 10;
+            // else if (redborder < (width + height) * 2 / 4)
+                // value /= 10;
+
+            // if (height)
+                // value *= width / (width + height);
                 
             return value;
         }
