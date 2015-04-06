@@ -1,0 +1,22 @@
+{
+  "name": "PolymerExamples",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ajlopez/JavaScriptSamples",
+  "authors": [
+    "ajlopez <webmaster@ajlopez.com>"
+  ],
+  "description": "Polymer Examples",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~0.8.0"
+  }
+}
