@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>AngularJS Scope Inheritance</title>
+    <link href='app.css' rel='stylesheet' />
+</head>
+<body ng-app='myApp'>
+    <h1>AngularJS Scope Inheritance</h1>
+    <div ng-controller='ParentCtrl' class='scope'>
+        <input type='text' ng-model='title' />
+        <div ng-controller='ChildCtrl' class='scope'>
+            <input type='text' ng-model='title' />
+            <input type='text' ng-model='content' />
+        </div>
+    </div>
+    <script src='angular.js'></script>
+    <script src='app.js'></script>
+</body>
+</html>
