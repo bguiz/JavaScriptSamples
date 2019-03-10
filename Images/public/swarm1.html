@@ -1,0 +1,88 @@
+<html>
+<head>
+<script src="/js/simplega.js" language="javascript"></script>
+<script src="/js/swarms.js" language="javascript"></script>
+</head>
+<body>
+<h1>Load Image - Detect White</h1>
+<canvas id="imagecanvas">
+</canvas>
+<script>
+var image = new Image();
+var canvas = document.getElementById('imagecanvas');
+var image_data;
+
+const engine = new simplega.Engine();
+var bestgenotype;
+var bestvalue;
+
+image.onload = function () { 
+    canvas.width = image.width;
+    canvas.height = image.height;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    image_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    const img = swarms.image(image_data.data, canvas.width, canvas.height);
+    
+    const genotypes = [];
+    
+    for (var k = 0; k < 100; k++)
+        genotypes.push(swarms.swarm(img, 0, 0, 0));
+        
+    const mutators = [];
+    
+    for (var k = 0; k < 4; k++)
+        mutators.push(swarms.mutator());
+        
+    engine.setPopulation(genotypes);
+    engine.setMutators(mutators);
+    
+    runGeneration();
+}
+
+function drawSwarm(swarm) {
+    const points = swarm.points();
+    
+    var ctx = canvas.getContext('2d');
+    ctx.putImageData(image_data, 0, 0);
+    
+    data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    for (var k = 0; k < points.length; k++) {
+        const point = points[k];
+        const x = point.x();
+        const y = point.y();
+        
+        const p = (y * canvas.width + x) * 4;
+        
+        data.data[p] = 255;
+        data.data[p + 1] = 255;
+        data.data[p + 2] = 255;
+    }
+    
+    ctx.putImageData(data, 0, 0);
+}
+
+function runGeneration() {
+    var newgenotypes = engine.nextPopulation();
+    best = simplega.getBestGenotype(newgenotypes);
+    var value = best.evaluate();
+    
+    if (!bestgenotype || bestvalue > value) {
+        bestgenotype = best;
+        bestvalue = value;
+    }
+    
+    if (best)
+        drawSwarm(best);
+        
+    setTimeout(runGeneration, 10);
+}
+
+image.src = 'images/set1_01.jpg';
+
+
+</script>
+</body>
+</html>
