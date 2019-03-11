@@ -56,7 +56,9 @@ var swarms = (function () {
             for (var k = 0; k < points.length; k++)
                 total += evaluatePoint(points[k]);
             
-            return 1 / (total + 0.01);
+            total /= points.length;
+            
+            return 1 / (total + 0.000001);
         };
         
         function evaluatePoint(point) {
@@ -76,11 +78,26 @@ var swarms = (function () {
         this.mutate = function () {
             const newpoints = points.slice();
             
-            for (var k = 0; k < points.length / 10; k++) {
-                const p = Math.floor(Math.random() * newpoints.length);
-                
-                newpoints[p] = mutatePoint(newpoints[p], mdelta);
-            }
+            const oper = Math.floor(Math.random() * 3);
+            
+            if (oper === 0)
+                for (var k = 0; k < points.length / 10; k++) {
+                    const p = Math.floor(Math.random() * newpoints.length);
+                    
+                    newpoints[p] = mutatePoint(newpoints[p], mdelta);
+                }
+            else if (oper === 1)
+                for (var k = 0; k < points.length / 20; k++) {
+                    const p = Math.floor(Math.random() * newpoints.length);
+                    
+                    newpoints.push(mutatePoint(newpoints[p], mdelta));
+                }
+            else
+                for (var k = 0; k < points.length / 20; k++) {
+                    const p = Math.floor(Math.random() * newpoints.length);
+                    
+                    newpoints.slice(p, 1);
+                }
             
             return new Swarm(image, r, g, b, newpoints);
         }
