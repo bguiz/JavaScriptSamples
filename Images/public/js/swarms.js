@@ -68,9 +68,9 @@ var swarms = (function () {
             if (pos < 0 || pos >= data.length)
                 return 255 * 3;
             
-            return Math.sqrt(Math.abs(data[pos] - r)^2 +
-                Math.abs(data[pos + 1] - g)^2 +
-                Math.abs(data[pos + 2] - b)^2);
+            return Math.sqrt(Math.abs(data[pos] - r) ** 2 +
+                Math.abs(data[pos + 1] - g) ** 2 +
+                Math.abs(data[pos + 2] - b) ** 2);
         }
         
         this.mutate = function () {

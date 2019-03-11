@@ -16,13 +16,13 @@ const engine = new simplega.Engine();
 var bestgenotype;
 var bestvalue;
 
-const r = 255;
+const r = 200;
 const g = 0;
 const b = 0;
 
-const cr = 255;
-const cg = 255;
-const cb = 255;
+const cr = 255 - r;
+const cg = 255 - g;
+const cb = 255 - b;
 
 image.onload = function () { 
     canvas.width = image.width;
@@ -67,6 +67,15 @@ function drawSwarm(swarm) {
         data.data[p] = cr;
         data.data[p + 1] = cg;
         data.data[p + 2] = cb;
+        data.data[p - 4] = cr;
+        data.data[p - 4 + 1] = cg;
+        data.data[p - 4 + 2] = cb;
+        data.data[p - 4 * canvas.width] = cr;
+        data.data[p - 4 * canvas.width + 1] = cg;
+        data.data[p - 4 * canvas.width + 2] = cb;
+        data.data[p + 4 * canvas.width] = cr;
+        data.data[p + 4 * canvas.width + 1] = cg;
+        data.data[p + 4 * canvas.width + 2] = cb;
     }
     
     ctx.putImageData(data, 0, 0);
@@ -88,7 +97,7 @@ function runGeneration() {
     setTimeout(runGeneration, 10);
 }
 
-image.src = 'images/set1_03.jpg';
+image.src = 'images/agriculture-color-cooking-255501.jpg';
 
 
 </script>
