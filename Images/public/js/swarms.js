@@ -33,7 +33,7 @@ var swarms = (function () {
         const data = image.data();
         const width = image.width();
         const height = image.height();
-        const mdelta = Math.min(width / 100, height / 100);
+        const mdelta = Math.min(width / 20, height / 20);
         
         const points = [];
         
@@ -56,7 +56,7 @@ var swarms = (function () {
             for (var k = 0; k < points.length; k++)
                 total += evaluatePoint(points[k]);
             
-            return 1 / (total + 0.1);
+            return 1 / (total + 0.01);
         };
         
         function evaluatePoint(point) {
@@ -66,7 +66,7 @@ var swarms = (function () {
             const pos = (point.y() * width + point.x()) * 4;
             
             if (pos < 0 || pos >= data.length)
-                return 255 * 5;
+                return 255 * 3;
             
             return Math.abs(data[pos] - r) +
                 Math.abs(data[pos + 1] - g) +
@@ -75,9 +75,12 @@ var swarms = (function () {
         
         this.mutate = function () {
             const newpoints = points.slice();
-            const p = Math.floor(Math.random() * newpoints.length);
             
-            newpoints[p] = mutatePoint(newpoints[p], mdelta);
+            for (var k = 0; k < points.length / 10; k++) {
+                const p = Math.floor(Math.random() * newpoints.length);
+                
+                newpoints[p] = mutatePoint(newpoints[p], mdelta);
+            }
             
             return new Swarm(image, r, g, b, newpoints);
         }

@@ -20,9 +20,9 @@ const r = 255;
 const g = 128;
 const b = 128;
 
-const cr = 255;
-const cg = 255;
-const cb = 255;
+const cr = 255 - r;
+const cg = 255 - g;
+const cb = 255- b;
 
 image.onload = function () { 
     canvas.width = image.width;
@@ -88,7 +88,7 @@ function runGeneration() {
     setTimeout(runGeneration, 10);
 }
 
-image.src = 'images/set1_01.jpg';
+image.src = 'images/set1_03.jpg';
 
 
 </script>
