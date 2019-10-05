@@ -1,0 +1,16 @@
+{
+  "name": "search",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Search text in text",
+  "scripts": {
+    "test": "simpleunit ./test -r"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "simpleunit": "0.0.8"
+  }
+}
