@@ -26,7 +26,21 @@ function split(text) {
     return fragments;
 }
 
+function contains(text, words) {
+    text = text.toLowerCase();
+    
+    for (let k = 0, l = words.length; k < l; k++) {
+        const word = words[k];
+        
+        if (text.indexOf(word) < 0)
+            return false;
+    }
+    
+    return true;
+}
+
 module.exports = {
-    split: split
+    split: split,
+    contains: contains
 };
 
