@@ -43,8 +43,27 @@ function contains(text, words) {
     return true;
 }
 
+function filter(texts, words) {
+    const w = [];
+    
+    for (let k = 0, l = words.length; k < l; k++)
+        w.push(words[k].toLowerCase().trim());
+    
+    const result = [];
+    
+    for (let k = 0, l = texts.length; k < l; k++) {
+        const text = texts[k];
+        
+        if (contains(text, w))
+            result.push(text);
+    }
+    
+    return result;
+}
+
 module.exports = {
     split: split,
-    contains: contains
+    contains: contains,
+    filter: filter
 };
 
