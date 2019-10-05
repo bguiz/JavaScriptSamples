@@ -32,7 +32,11 @@ function contains(text, words) {
     for (let k = 0, l = words.length; k < l; k++) {
         const word = words[k];
         
-        if (text.indexOf(word) < 0)
+        if (word[0] === '~') {
+            if (text.indexOf(word.substring(1)) >= 0)
+                return false;
+        }
+        else if (text.indexOf(word) < 0)
             return false;
     }
     
