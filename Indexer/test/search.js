@@ -15,3 +15,15 @@ exports['or'] = function (test) {
     });
 };
 
+exports['and'] = function (test) {
+    const result = search.and(
+        { '0': 10, '1': 25 },
+        { '1': 10, '2': 5 }
+    );
+    
+    test.ok(result);
+    test.deepEqual(result, {
+        '1': 10
+    });
+};
+

@@ -14,6 +14,17 @@ function or(index1, index2) {
     return result;
 }
 
+function and(index1, index2) {
+    const result = {};
+    
+    for (let n in index1)
+        if (index2[n])
+            result[n] = Math.min(index1[n], index2[n]);
+            
+    return result;
+}
+
 module.exports = {
-    or
+    or,
+    and
 };
