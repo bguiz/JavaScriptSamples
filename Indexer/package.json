@@ -11,6 +11,9 @@
   "engines": {
     "node": ">= 0.12.0"
   },
+  "scripts": {
+    "test": "simpleunit -r ./test"
+  },
   "devDependencies": {
     "simpleunit": "0.0.8"
   }  

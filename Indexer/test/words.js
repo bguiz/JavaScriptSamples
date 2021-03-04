@@ -57,3 +57,14 @@ exports['null text'] = function (test) {
     test.deepEqual(result, []);
 }
 
+exports['word count'] = function (test) {
+    const result = words.countWords(words.toWords('alfa beta alfa zulu'));
+    
+    test.ok(result);
+    test.deepEqual(result, {
+        "alfa": 2,
+        "beta": 1,
+        "zulu": 1
+    });
+}
+

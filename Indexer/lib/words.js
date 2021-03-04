@@ -1,4 +1,20 @@
 
+function countWords(words) {
+    const result = {};
+    const l = words.length;
+    
+    for (let k = 0; k < l; k++) {
+        const word = words[k];
+        
+        if (result[word])
+            result[word]++;
+        else
+            result[word] = 1;
+    }
+
+    return result;
+}
+
 function toWords(text) {
     const words = [];
     
@@ -33,5 +49,6 @@ function isLetter(ch) {
 }
 
 module.exports = {
-    toWords
+    toWords,
+    countWords
 }
