@@ -11,7 +11,9 @@ function processFiles(dirpath, extension, prefix, fn) {
         
         if (filename === 'node_modules')
             continue;
-        if (filename === 'README.md')
+        if (filename.toLowerCase() === 'readme.md')
+            continue;
+        if (filename === '.github')
             continue;
             
         const filepath = path.join(dirpath,  filenames[k]);
