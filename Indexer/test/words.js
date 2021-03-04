@@ -68,3 +68,32 @@ exports['word count'] = function (test) {
     });
 }
 
+exports['collect words'] = function (test) {
+    const words1 = words.countWords(words.toWords('alfa beta alfa zulu'));
+    const words2 = words.countWords(words.toWords('zulu delta tango'));
+    
+    const result = {};
+    
+    words.collectWords(result, words1, 0);
+    words.collectWords(result, words2, 1);
+    
+    test.deepEqual(result, {
+        "alfa": {
+            '0': 2
+        },
+        "beta": {
+            '0': 1
+        },
+        "delta": {
+            '1': 1
+        },
+        "tango": {
+            '1': 1
+        },
+        "zulu": {
+            '0': 1,
+            '1': 1
+        }
+    });
+}
+

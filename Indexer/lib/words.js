@@ -2,7 +2,7 @@
 function countWords(words) {
     const result = {};
     const l = words.length;
-    
+        
     for (let k = 0; k < l; k++) {
         const word = words[k];
         
@@ -13,6 +13,15 @@ function countWords(words) {
     }
 
     return result;
+}
+
+function collectWords(result, words, key) {
+    for (let word in words) {
+        if (!result[word])
+            result[word] = {};
+            
+        result[word][key] = words[word];
+    }   
 }
 
 function toWords(text) {
@@ -50,5 +59,6 @@ function isLetter(ch) {
 
 module.exports = {
     toWords,
-    countWords
+    countWords,
+    collectWords
 }
