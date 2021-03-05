@@ -8,6 +8,13 @@ exports['text to words'] = function (test) {
     test.deepEqual(result, [ 'hello', 'world' ]);
 }
 
+exports['text with accented letters to words'] = function (test) {
+    const result = words.toWords('áéíóúäëïöüàèìòùñ hello world');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'áéíóúäëïöüàèìòùñ', 'hello', 'world' ]);
+}
+
 exports['title text to words with weight'] = function (test) {
     const result = words.toWords('title: hello world');
     

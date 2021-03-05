@@ -17,6 +17,7 @@ files.processFiles(dirpath, extension, null,
         const text = fs.readFileSync(filepath).toString();
         
         const title = markdown.getTitle(text);
+        const summary = markdown.getSummary(text);
         const description = markdown.getDescription(text);
         const header = markdown.getHeader(text);
         
@@ -27,7 +28,9 @@ files.processFiles(dirpath, extension, null,
         else if (header)
             file.t = header;
         
-        if (description)
+        if (summary)
+            file.d = summary;
+        else if (description)
             file.d = description;
             
         filesdes.push(file);

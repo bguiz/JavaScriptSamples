@@ -1,5 +1,6 @@
 
 const specials = [ 'title', 'tags', 'description' ];
+const extraletters = 'áéíóúäëïöüàèìòùñ';
 
 function countWords(words) {
     const result = {};
@@ -103,7 +104,8 @@ function toWords(text) {
 }
 
 function isLetter(ch) {
-    return ch >= 'a' && ch <= 'z';
+    return (ch >= 'a' && ch <= 'z') ||
+        extraletters.indexOf(ch) >= 0;
 }
 
 module.exports = {
