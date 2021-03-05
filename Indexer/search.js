@@ -9,13 +9,25 @@ let result;
 for (let k = 2; k < process.argv.length; k++) {
     const word = process.argv[k].toLowerCase();
     
-    if (!index[word])
+    let subresult;
+    
+    for (n in index) {
+        if (n.indexOf(word) < 0)
+            continue;
+            
+        if (subresult)
+            subresult = search.or(subresult, index[n]);
+        else
+            subresult = index[n];
+    }
+    
+    if (!subresult)
         continue;
         
     if (result)
-        result = search.and(result, index[word]);
+        result = search.and(result, subresult);
     else    
-        result = index[word];
+        result = subresult;
 }
 
 const list = search.sort(result);
