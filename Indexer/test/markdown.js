@@ -11,6 +11,17 @@ collection_order: 2200\n\
 # Hello everybody\n\
 ';
 
+const text2 = '---\n\
+layout: lay1\n\
+title: Hello world\n\
+tags: hello, world\n\
+event:\n\
+  descriptionSummary: "Hello application"\n\
+collection_order: 2200\n\
+---\n\
+# Hello everybody\n\
+';
+
 exports['get title from annotation'] = function (test) {
     const title = markdown.getTitle(text);
     
@@ -23,6 +34,13 @@ exports['get description from annotation'] = function (test) {
     
     test.ok(description);
     test.equal(description, 'Hello application');
+};
+
+exports['get summary from annotation'] = function (test) {
+    const summary = markdown.getSummary(text2);
+    
+    test.ok(summary);
+    test.equal(summary, 'Hello application');
 };
 
 exports['get header first level'] = function (test) {

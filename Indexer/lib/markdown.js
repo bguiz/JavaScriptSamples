@@ -7,7 +7,7 @@ function getContent(text, name) {
 
     p += name.length;
     
-    const p2 = text.indexOf('\n', p);
+    let p2 = text.indexOf('\n', p);
     
     if (p2 < 0)
         p2 = text.length;
@@ -35,8 +35,13 @@ function getHeader(text) {
     return getContent(text, '# ');
 }
 
+function getSummary(text) {
+    return getContent(text, 'descriptionSummary:');
+}
+
 module.exports = {
     getTitle,
     getDescription,
-    getHeader
+    getHeader,
+    getSummary
 };

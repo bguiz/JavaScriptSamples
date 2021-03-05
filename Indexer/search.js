@@ -35,7 +35,18 @@ const list = search.sort(result);
 if (list) {
     const l = list.length;
     
-    for (let k = 0; k < l; k++)
-        console.log(files[list[k].i], list[k].v);
+    for (let k = 0; k < l; k++) {
+        const nfile = list[k].i;
+        const file = files[nfile];
+        
+        console.log(file.n, list[k].v);
+        
+        if (file.t)
+            console.log(file.t);
+        if (file.d)
+            console.log(file.d);
+            
+        console.log();
+    }
 }
 
