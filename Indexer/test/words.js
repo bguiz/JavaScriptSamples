@@ -36,6 +36,34 @@ exports['description text to words with weight and simple text'] = function (tes
     test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
 }
 
+exports['header level 1 text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('hi\n# hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hi', 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
+}
+
+exports['header level 2 text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('hi\n## hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hi', 'hello*8', 'world*8', 'lorem', 'ipsum' ]);
+}
+
+exports['header level 3 text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('hi\n### hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hi', 'hello*4', 'world*4', 'lorem', 'ipsum' ]);
+}
+
+exports['header level 4 text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('hi\n#### hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hi', 'hello*2', 'world*2', 'lorem', 'ipsum' ]);
+}
+
 exports['text to words skipping spaces'] = function (test) {
     const result = words.toWords('  hello   world  ');
     

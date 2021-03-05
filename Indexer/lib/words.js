@@ -73,6 +73,23 @@ function toWords(text) {
             factor = 1;
             first = true;
         }
+        
+        if (ch === '#' && first) {
+            if (text[k + 1] != '#')
+                factor = 16;
+            else if (text[k + 2] != '#') {
+                factor = 8;
+                k += 1;
+            }
+            else if (text[k + 3] != '#') {
+                factor = 4;
+                k += 2;
+            }
+            else {
+                factor = 2;
+                k += 3;
+            }
+        }
     }
     
     if (word.length) {
