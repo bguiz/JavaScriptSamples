@@ -1,5 +1,5 @@
 
-const specials = [ 'title', 'tags', 'description' ];
+const specials = [ 'title', 'tags', 'description', 'descriptionsummary' ];
 const extraletters = 'áéíóúäëïöüàèìòùñ';
 
 function countWords(words) {

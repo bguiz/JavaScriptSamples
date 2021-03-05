@@ -43,6 +43,13 @@ exports['description text to words with weight and simple text'] = function (tes
     test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
 }
 
+exports['descriptionSummary text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('descriptionSummary: hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
+}
+
 exports['header level 1 text to words with weight and simple text'] = function (test) {
     const result = words.toWords('hi\n# hello world\nlorem ipsum');
     
