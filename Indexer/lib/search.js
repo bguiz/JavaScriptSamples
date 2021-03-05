@@ -24,7 +24,27 @@ function and(index1, index2) {
     return result;
 }
 
+function sort(index) {
+    const list = [];
+    
+    for (let n in index)
+        list.push({ i: n, v: index[n] });
+        
+    list.sort(function(a, b) {
+        if (a.v < b.v)
+            return 1;
+            
+        if (a.v > b.v)
+            return -1;
+            
+        return 0;
+    });
+    
+    return list;
+}
+
 module.exports = {
     or,
-    and
+    and,
+    sort
 };

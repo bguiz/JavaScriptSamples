@@ -27,3 +27,16 @@ exports['and'] = function (test) {
     });
 };
 
+exports['sort'] = function (test) {
+    const result = search.sort(
+        { '0': 10, '1': 25, '2': 5 }
+    );
+    
+    test.ok(result);
+    test.deepEqual(result, [
+        { i: '1', v: 25 },
+        { i: '0', v: 10 },
+        { i: '2', v: 5 }
+    ]);
+};
+
