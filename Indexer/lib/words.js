@@ -6,12 +6,20 @@ function countWords(words) {
     const l = words.length;
         
     for (let k = 0; k < l; k++) {
-        const word = words[k];
+        let word = words[k];
         
+        const p = word.indexOf('*');
+        let weight = 1;
+        
+        if (p >= 0) {
+            weight = parseInt(word.substring(p + 1));
+            word = word.substring(0, p);
+        }    
+                
         if (result[word])
-            result[word]++;
+            result[word] += weight;
         else
-            result[word] = 1;
+            result[word] = weight;
     }
 
     return result;
