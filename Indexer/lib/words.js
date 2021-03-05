@@ -1,4 +1,6 @@
 
+const specials = [ 'title', 'tags', 'description' ];
+
 function countWords(words) {
     const result = {};
     const l = words.length;
@@ -33,8 +35,9 @@ function toWords(text) {
     text = text.toLowerCase();
     
     const l = text.length;
-    
+    let first = true;    
     let word = '';
+    let factor = 1;
     
     for (let k = 0; k < l; k++) {
         const ch = text[k];
@@ -42,13 +45,34 @@ function toWords(text) {
         if (isLetter(ch))
             word += ch;
         else if (word.length > 0) {
+            if (ch === ':' && first) {
+                if (specials.indexOf(word) >= 0) {
+                    word = '';
+                    factor = 16;
+                    continue;
+                }
+            }
+            
+            if (factor > 1)
+                word += '*' + factor;
+                
             words.push(word);
             word = '';
+            first = false;
+        }
+        
+        if (ch === '\n') {
+            factor = 1;
+            first = true;
         }
     }
     
-    if (word.length)
+    if (word.length) {
+        if (factor > 1)
+            word += '*' + factor;
+            
         words.push(word);
+    }
         
     return words;
 }

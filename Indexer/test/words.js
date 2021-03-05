@@ -8,6 +8,34 @@ exports['text to words'] = function (test) {
     test.deepEqual(result, [ 'hello', 'world' ]);
 }
 
+exports['title text to words with weight'] = function (test) {
+    const result = words.toWords('title: hello world');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hello*16', 'world*16' ]);
+}
+
+exports['title text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('title: hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
+}
+
+exports['tags text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('tags: hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
+}
+
+exports['description text to words with weight and simple text'] = function (test) {
+    const result = words.toWords('description: hello world\nlorem ipsum');
+    
+    test.ok(result);
+    test.deepEqual(result, [ 'hello*16', 'world*16', 'lorem', 'ipsum' ]);
+}
+
 exports['text to words skipping spaces'] = function (test) {
     const result = words.toWords('  hello   world  ');
     
