@@ -39,9 +39,14 @@ function getSummary(text) {
     return getContent(text, 'descriptionSummary:');
 }
 
+function getTags(text) {
+    return getContent(text, 'tags:');
+}
+
 module.exports = {
     getTitle,
     getDescription,
     getHeader,
-    getSummary
+    getSummary,
+    getTags
 };

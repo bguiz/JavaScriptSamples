@@ -4,7 +4,7 @@ const markdown = require('../lib/markdown');
 const text = '---\n\
 layout: lay1\n\
 title: Hello world\n\
-tags: hello, world\n\
+tags: hello, tags\n\
 description: "Hello application"\n\
 collection_order: 2200\n\
 ---\n\
@@ -41,6 +41,13 @@ exports['get summary from annotation'] = function (test) {
     
     test.ok(summary);
     test.equal(summary, 'Hello application');
+};
+
+exports['get tags from annotation'] = function (test) {
+    const tags = markdown.getTags(text);
+    
+    test.ok(tags);
+    test.equal(tags, 'hello, tags');
 };
 
 exports['get header first level'] = function (test) {
