@@ -1,6 +1,17 @@
 
 const specials = [ 'title', 'tags', 'description', 'descriptionsummary' ];
 const extraletters = 'áéíóúäëïöüàèìòùñ';
+const extralettersConverted = 'aeiouaeiouaeioun';
+const excludedWordsList = [
+    'the', 'with', 'can', 'all', 'you', 'and', 'here', 'com', 'org',
+    'for', 'will', 'not', 'from', 'which', 'should', 'need', 'but',
+    'nbsp', 'your', 'png', 'when', 'does', 'doesn', 'this', 'its', 'must',
+    'none', 'they', 'that', 'out', 'look', 'get', 'www',
+];
+const excludedWords = new Map();
+excludedWordsList.forEach((excludedWord) => {
+    excludedWords.set(excludedWord, true);
+});
 
 function countWords(words) {
     const result = {};
@@ -23,6 +34,23 @@ function countWords(words) {
             result[word] = weight;
     }
 
+    return adjustedCountWords(result);
+}
+
+function adjustedCountWords(wordMap) {
+    const uniqueWords = Object.keys(wordMap); 
+    const uniqueWordCount = uniqueWords.length;
+    console.log({
+        uniqueWordCount,
+        uniqueWords: uniqueWords.length,
+    });
+
+    const result = {};
+    uniqueWords.forEach((word) => {
+        const weight = wordMap[word];
+        const adjustedWeight = Math.floor(weight * 1e4 / uniqueWordCount);
+        result[word] = adjustedWeight;
+    });
     return result;
 }
 
@@ -44,7 +72,8 @@ function toWords(text) {
     text = text.toLowerCase();
     
     const l = text.length;
-    let first = true;    
+    let first = true;
+    let frontMatterSeparatorCount = 0;
     let word = '';
     let factor = 1;
     
@@ -53,21 +82,37 @@ function toWords(text) {
         
         if (isLetter(ch))
             word += ch;
+        else if (isExtendedLetter(ch))
+            word += normaliseExtendedLetter(ch);
         else if (word.length > 0) {
-            if (ch === ':' && first) {
+            if (ch === ':' && first
+               && frontMatterSeparatorCount < 2) {
                 if (specials.indexOf(word) >= 0) {
                     word = '';
                     factor = 16;
                     continue;
                 }
             }
-            
-            if (factor > 1)
-                word += '*' + factor;
-                
-            words.push(word);
+
+            if (word.length > 2 && !excludedWords.has(word)) {
+                if (factor > 1)
+                    word += '*' + factor;
+
+                words.push(word);
+            }
+
             word = '';
             first = false;
+        }
+
+        if (first && ch === '-'
+            && text[k+1] === '-'
+            && text[k+2] === '-'
+            && text[k+3] === '\n') {
+            k += 2;
+            word = '';
+            first = false;
+            frontMatterSeparatorCount += 1;
         }
         
         if (ch === '\n') {
@@ -104,8 +149,15 @@ function toWords(text) {
 }
 
 function isLetter(ch) {
-    return (ch >= 'a' && ch <= 'z') ||
-        extraletters.indexOf(ch) >= 0;
+    return (ch >= 'a' && ch <= 'z');
+}
+
+function isExtendedLetter(ch) {
+    return (extraletters.indexOf(ch) >= 0);
+}
+
+function normaliseExtendedLetter(ch) {
+    return extralettersConverted.charAt(extraletters.indexOf(ch));
 }
 
 module.exports = {

@@ -18,6 +18,7 @@ files.processFiles(dirpath, extension, null,
         
         const title = markdown.getTitle(text);
         const summary = markdown.getSummary(text);
+        const tags = markdown.getTags(text);
         const description = markdown.getDescription(text);
         const header = markdown.getHeader(text);
         
@@ -32,6 +33,9 @@ files.processFiles(dirpath, extension, null,
             file.d = summary;
         else if (description)
             file.d = description;
+
+        if (tags)
+            file.d = file.d + ' ' + tags;
             
         filesdes.push(file);
         

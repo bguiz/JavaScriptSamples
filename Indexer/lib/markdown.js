@@ -35,6 +35,10 @@ function getHeader(text) {
     return getContent(text, '# ');
 }
 
+function getTags(text) {
+    return getContent(text, 'tags: ');
+}
+
 function getSummary(text) {
     return getContent(text, 'descriptionSummary:');
 }
@@ -43,5 +47,6 @@ module.exports = {
     getTitle,
     getDescription,
     getHeader,
+    getTags,
     getSummary
 };
