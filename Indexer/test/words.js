@@ -148,6 +148,16 @@ exports['word count with weight'] = function (test) {
     });
 }
 
+exports['word count with weight in tags'] = function (test) {
+    const result = words.countWords(words.toWords('tags: hello world\nworld'));
+    
+    test.ok(result);
+    test.deepEqual(result, {
+        "hello": 16,
+        "world": 17
+    });
+}
+
 exports['collect words'] = function (test) {
     const words1 = words.countWords(words.toWords('alfa beta alfa zulu'));
     const words2 = words.countWords(words.toWords('zulu delta tango'));
