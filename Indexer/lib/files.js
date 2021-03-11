@@ -13,8 +13,6 @@ function processFiles(dirpath, extension, prefix, fn) {
             continue;
         if (filename.toLowerCase() === 'readme.md')
             continue;
-        if (filename.toLowerCase() === 'index.md')
-            continue;
         if (filename === '.github')
             continue;
             

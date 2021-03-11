@@ -43,10 +43,15 @@ function getTags(text) {
     return getContent(text, 'tags:');
 }
 
+function getPermalink(text) {
+    return getContent(text, 'permalink:');
+}
+
 module.exports = {
     getTitle,
     getDescription,
     getHeader,
     getSummary,
-    getTags
+    getTags,
+    getPermalink
 };

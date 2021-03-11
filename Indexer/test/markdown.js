@@ -7,6 +7,7 @@ title: Hello world\n\
 tags: hello, tags\n\
 description: "Hello application"\n\
 collection_order: 2200\n\
+permalink: /rsk/rbtc/\n\
 ---\n\
 # Hello everybody\n\
 ';
@@ -55,5 +56,12 @@ exports['get header first level'] = function (test) {
     
     test.ok(header);
     test.equal(header, 'Hello everybody');
+};
+
+exports['get permalink'] = function (test) {
+    const permalink = markdown.getPermalink(text);
+    
+    test.ok(permalink);
+    test.equal(permalink, '/rsk/rbtc/');
 };
 
