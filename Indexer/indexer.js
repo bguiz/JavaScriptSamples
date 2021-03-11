@@ -9,13 +9,22 @@ const dirpath = process.argv[2];
 const arg2 = process.argv[3];
 const arg3 = process.argv[4];
 
-const filesdes = [];
+let filesdes = [];
 const result = {};
 
 if (arg2.endsWith('.json')) {
     const mappingFilename = arg2;
     const extension = '.' + arg3;
-    files.processMapping(mappingFilename, extension, processFile);
+    const mappingJson = fs.readFileSync(mappingFilename);
+    const mapping = JSON.parse(mappingJson);
+    files.processMapping(mapping, extension, processFile);
+    filesdes = filesdes.map((filedes) => {
+        const mappedN = mapping[filedes.n];
+        return {
+            ...filedes,
+            n: mappedN,
+        };
+    });
 } else {
     const extension = '.' + arg2;
     files.processDirectory(dirpath, extension, null, processFile);
@@ -44,7 +53,7 @@ function processFile(filename) {
         file.d = description;
 
     if (tags)
-        file.d = file.d + ' ' + tags;
+        file.d = (file.d || '') + '||' + tags;
 
     filesdes.push(file);
 

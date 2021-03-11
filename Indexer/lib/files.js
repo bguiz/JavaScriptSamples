@@ -34,9 +34,7 @@ function processDirectory(dirpath, extension, prefix, fn) {
     }
 }
 
-function processMapping(mappingFilename, extension, fn) {
-    const mappingJson = fs.readFileSync(mappingFilename);
-    const mapping = JSON.parse(mappingJson);
+function processMapping(mapping, extension, fn) {
     const filenames = Object.keys(mapping);
     filenames.forEach((filename) => {
         if (!filename.endsWith(extension))

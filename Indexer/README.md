@@ -17,13 +17,18 @@ node indexer.js /var/myrepo md
 ```
 
 An alternative way to index is by specifying a mapping JSON file,
-where the keys are the file names.
-(Values can be anything.)
+where
+
+- The keys are the file names
+- The values are the corresponding identifier
+  that you want the file names to be replaced with
+  - When indexing content for a statically generated site,
+    the most useful value to use is the path component of its URL
 
 ```json
 {
-  "some/path/file.md": "",
-  "some/other/path/file.md": ""
+  "some/path/index.md": "/some/path/",
+  "some/other/path/file.md": "/some/other/path/file/"
 }
 ```
 
