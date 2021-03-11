@@ -16,18 +16,18 @@ excludedWordsList.forEach((excludedWord) => {
 function countWords(words) {
     const result = {};
     const l = words.length;
-        
+
     for (let k = 0; k < l; k++) {
         let word = words[k];
-        
+
         const p = word.indexOf('*');
         let weight = 1;
-        
+
         if (p >= 0) {
             weight = parseInt(word.substring(p + 1));
             word = word.substring(0, p);
-        }    
-                
+        }
+
         if (result[word])
             result[word] += weight;
         else
@@ -38,17 +38,14 @@ function countWords(words) {
 }
 
 function adjustedCountWords(wordMap) {
-    const uniqueWords = Object.keys(wordMap); 
+    const uniqueWords = Object.keys(wordMap);
     const uniqueWordCount = uniqueWords.length;
-    console.log({
-        uniqueWordCount,
-        uniqueWords: uniqueWords.length,
-    });
 
     const result = {};
     uniqueWords.forEach((word) => {
         const weight = wordMap[word];
-        const adjustedWeight = Math.floor(weight * 1e4 / uniqueWordCount);
+        const adjustedWeight =
+            Math.floor(weight * 1e4 / uniqueWordCount);
         result[word] = adjustedWeight;
     });
     return result;
@@ -58,28 +55,28 @@ function collectWords(result, words, key) {
     for (let word in words) {
         if (!result[word])
             result[word] = {};
-            
+
         result[word][key] = words[word];
-    }   
+    }
 }
 
 function toWords(text) {
     const words = [];
-    
+
     if (!text)
         return words;
-        
+
     text = text.toLowerCase();
-    
+
     const l = text.length;
     let first = true;
     let frontMatterSeparatorCount = 0;
     let word = '';
     let factor = 1;
-    
+
     for (let k = 0; k < l; k++) {
         const ch = text[k];
-        
+
         if (isLetter(ch))
             word += ch;
         else if (isExtendedLetter(ch))
@@ -114,12 +111,12 @@ function toWords(text) {
             first = false;
             frontMatterSeparatorCount += 1;
         }
-        
+
         if (ch === '\n') {
             factor = 1;
             first = true;
         }
-        
+
         if (ch === '#' && first) {
             if (text[k + 1] != '#')
                 factor = 16;
@@ -137,14 +134,14 @@ function toWords(text) {
             }
         }
     }
-    
+
     if (word.length) {
         if (factor > 1)
             word += '*' + factor;
-            
+
         words.push(word);
     }
-        
+
     return words;
 }
 

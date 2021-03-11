@@ -5,26 +5,30 @@ Simple indexer of files, and search by word(s)
 ## Run
 
 Index the files in a directory with an extension
-```
-node indexer <path> <extension>
+
+```shell
+node indexer.js <path> <extension>
 ```
 
 Example
-```
-node indexer /var/myrepo md
+
+```shell
+node indexer.js /var/myrepo md
 ```
 
 This process creates two files in current directory:
 `files.json` and `index.json`
 
 Now search the files with:
-```
-node search <words>...
+
+```shell
+node search.js <words>...
 ```
 
 Example
-```
-node search block transaction
+
+```shell
+node search.js block transaction
 ```
 
 The list of files containing ALL the words will be listed.
