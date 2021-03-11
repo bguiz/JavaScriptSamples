@@ -37,3 +37,5 @@ The first ones have more occurrences of the words combination
 - [Node.js check if path is file or directory](https://stackoverflow.com/questions/15630770/node-js-check-if-path-is-file-or-directory)
 - [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 - [Multiline strings in ES6 JavaScript](https://jack.ofspades.com/multiline-strings-in-es6-javascript/)
+- [Improvements by bguiz](https://github.com/bguiz/JavaScriptSamples/blob/feat/bguiz-indexer-improvements/Indexer/README.md)
+
