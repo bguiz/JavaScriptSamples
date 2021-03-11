@@ -26,6 +26,7 @@ files.processFiles(dirpath, extension, null,
         const description = markdown.getDescription(text);
         const header = markdown.getHeader(text);
         const tags = markdown.getTags(text);
+        const permalink = markdown.getPermalink(text);
         
         const file = { n: filename };
         
@@ -44,6 +45,9 @@ files.processFiles(dirpath, extension, null,
                 file.d += ' ' + tags;
             else
                 file.d = tags;
+                
+        if (permalink)
+            file.l = permalink;
             
         filesdes.push(file);
         

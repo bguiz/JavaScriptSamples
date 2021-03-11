@@ -43,8 +43,24 @@ function sort(index) {
     return list;
 }
 
+function link(file) {
+    if (file.l)
+        return file.l;
+        
+    const name = file.n;
+    
+    if (name.endsWith('/index.md'))
+        return name.substring(0, name.length - 8);
+
+    if (name.endsWith('.md'))
+        return name.substring(0, name.length - 3) + '/';
+        
+    return name;
+}
+
 module.exports = {
     or,
     and,
-    sort
+    sort,
+    link
 };

@@ -40,3 +40,27 @@ exports['sort'] = function (test) {
     ]);
 };
 
+exports['get normal link'] = function (test) {
+    const result = search.link(
+        { n:'/topic/' }
+    );
+    
+    test.equal(result, '/topic/');
+};
+
+exports['remove .md from name'] = function (test) {
+    const result = search.link(
+        { n:'/topic/topic1.md' }
+    );
+    
+    test.equal(result, '/topic/topic1/');
+};
+
+exports['use permalink'] = function (test) {
+    const result = search.link(
+        { n:'/topic/index.md', l: '/permalink/' }
+    );
+    
+    test.equal(result, '/permalink/');
+};
+
