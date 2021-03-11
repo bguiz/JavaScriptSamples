@@ -7,13 +7,36 @@ Simple indexer of files, and search by word(s)
 Index the files in a directory with an extension
 
 ```shell
-node indexer.js <path> <extension>
+node indexer.js <repoPath> <extension>
 ```
 
 Example
 
 ```shell
 node indexer.js /var/myrepo md
+```
+
+An alternative way to index is by specifying a mapping JSON file,
+where the keys are the file names.
+(Values can be anything.)
+
+```json
+{
+  "some/path/file.md": "",
+  "some/other/path/file.md": ""
+}
+```
+
+In this case, the index command has an extra parameter
+
+```shell
+node indexer.js <repoPath> <mappingFilePath> <extension>
+```
+
+Example
+
+```shell
+node indexer.js /var/myrepo /var/myrepo/mapping.json md
 ```
 
 This process creates two files in current directory:

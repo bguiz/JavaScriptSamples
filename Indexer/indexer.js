@@ -6,12 +6,20 @@ const files = require('./lib/files');
 const markdown = require('./lib/markdown');
 
 const dirpath = process.argv[2];
-const extension = '.' + process.argv[3];
+const arg2 = process.argv[3];
+const arg3 = process.argv[4];
 
 const filesdes = [];
 const result = {};
 
-files.processDirectory(dirpath, extension, null, processFile);
+if (arg2.endsWith('.json')) {
+    const mappingFilename = arg2;
+    const extension = '.' + arg3;
+    files.processMapping(mappingFilename, extension, processFile);
+} else {
+    const extension = '.' + arg2;
+    files.processDirectory(dirpath, extension, null, processFile);
+}
 
 function processFile(filename) {
     const filepath = path.join(dirpath, filename);
