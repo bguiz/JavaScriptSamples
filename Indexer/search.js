@@ -39,7 +39,7 @@ if (list) {
         const nfile = list[k].i;
         const file = files[nfile];
         
-        console.log(file.n, list[k].v);
+        console.log(search.link(file), list[k].v);
         
         if (file.t)
             console.log(file.t);

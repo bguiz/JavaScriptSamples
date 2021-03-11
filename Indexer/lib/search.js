@@ -47,8 +47,13 @@ function link(file) {
     if (file.l)
         return file.l;
         
-    const name = file.n;
+    let name = file.n;
     
+    name = name.replace(/\\/g, '/');
+    
+    if (name[0] != '/')
+        name = '/' + name;
+        
     if (name.endsWith('/index.md'))
         return name.substring(0, name.length - 8);
 

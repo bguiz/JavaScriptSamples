@@ -48,6 +48,22 @@ exports['get normal link'] = function (test) {
     test.equal(result, '/topic/');
 };
 
+exports['replace backslashes to slashes'] = function (test) {
+    const result = search.link(
+        { n:'\\topic\\' }
+    );
+    
+    test.equal(result, '/topic/');
+};
+
+exports['add initial slash to name if missing'] = function (test) {
+    const result = search.link(
+        { n:'topic/' }
+    );
+    
+    test.equal(result, '/topic/');
+};
+
 exports['remove .md from name'] = function (test) {
     const result = search.link(
         { n:'/topic/topic1.md' }
