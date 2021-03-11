@@ -21,7 +21,7 @@ for (let k = 2; k < process.argv.length; k++) {
             subresult = index[n];
     }
     
-    if (!subresult)
+    if (!subresult || !Object.keys(subresult).length)
         continue;
         
     if (result)
