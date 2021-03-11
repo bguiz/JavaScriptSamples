@@ -6,8 +6,11 @@ Simple indexer of files, and search by word(s)
 
 Index the files in a directory with an extension
 ```
-node indexer <path> <extension>
+node indexer <path> <extension> [-w]
 ```
+
+The option `-w` specified a weighted count of words into a file, pondering
+the number of unique words.
 
 Example
 ```

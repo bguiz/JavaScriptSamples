@@ -23,9 +23,19 @@ function countWords(words, weighted) {
             result[word] = weight;
     }
     
-    if (weighted)
-        for (let n in result)
+    if (weighted) {
+        const toremove = [];
+        
+        for (let n in result) {
             result[n] = Math.floor(result[n] * 1000 / l);
+            
+            if (result[n] == 0)
+                toremove.push(n);
+        }
+        
+        for (let k = 0; k < toremove.length; k++)
+            delete result[toremove[k]];
+    }
 
     return result;
 }

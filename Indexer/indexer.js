@@ -1,12 +1,17 @@
 const fs = require('fs');
 const path = require('path');
+const simpleargs = require('simpleargs');
+
+simpleargs.define('w','weighted',false,'Weighted Word Count', { flag: true });
 
 const words = require('./lib/words');
 const files = require('./lib/files');
 const markdown = require('./lib/markdown');
 
-const dirpath = process.argv[2];
-const extension = '.' + process.argv[3];
+const args = simpleargs(process.argv.slice(2));
+
+const dirpath = args._[0];
+const extension = '.' + args._[1];
 
 const filesdes = [];
 const result = {};
@@ -42,7 +47,7 @@ files.processFiles(dirpath, extension, null,
             
         filesdes.push(file);
         
-        const cwords = words.countWords(words.toWords(text));
+        const cwords = words.countWords(words.toWords(text), args.weighted);
         
         words.collectWords(result, cwords, filesdes.length - 1);
     });
