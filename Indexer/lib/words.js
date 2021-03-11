@@ -2,7 +2,7 @@
 const specials = [ 'title', 'tags', 'description', 'descriptionsummary', 'tags' ];
 const extraletters = 'áéíóúäëïöüàèìòùñ';
 
-function countWords(words) {
+function countWords(words, weighted) {
     const result = {};
     const l = words.length;
         
@@ -22,6 +22,10 @@ function countWords(words) {
         else
             result[word] = weight;
     }
+    
+    if (weighted)
+        for (let n in result)
+            result[n] = Math.floor(result[n] * 1000 / l);
 
     return result;
 }

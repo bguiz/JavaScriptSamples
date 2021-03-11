@@ -138,6 +138,17 @@ exports['word count'] = function (test) {
     });
 }
 
+exports['word count weighted with no of words'] = function (test) {
+    const result = words.countWords(words.toWords('alfa beta alfa zulu'), true);
+    
+    test.ok(result);
+    test.deepEqual(result, {
+        "alfa": 500,
+        "beta": 250,
+        "zulu": 250
+    });
+}
+
 exports['word count with weight'] = function (test) {
     const result = words.countWords(words.toWords('title: hello world\nworld'));
     
