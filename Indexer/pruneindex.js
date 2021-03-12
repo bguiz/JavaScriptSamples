@@ -14,15 +14,20 @@ catch (ex) {
 
 simpleargs.define('ml','maxlen',0,'Maximum Length');
 simpleargs.define('mc','mincount',0,'Minimum Count');
+simpleargs.define('s','subword',0,'Subword');
 
 const args = simpleargs(process.argv.slice(2));
 
 const maxlen = args.maxlen;
 const mincount = args.mincount;
+const subword = args.subword;
     
 const newindex = {};
 
 for (let word in index) {
+    if (subword && word.indexOf(subword) < 0)
+        continue;
+        
     if (maxlen && word.length <= maxlen) {
         toPrune(word);
 

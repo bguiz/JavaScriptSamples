@@ -4,6 +4,8 @@ Simple indexer of files, and search by word(s)
 
 ## Run
 
+### Create the index
+
 Index the files in a directory with an extension
 ```
 node indexer <path> <extension> [-w]
@@ -20,7 +22,81 @@ node indexer /var/myrepo md
 This process creates two files in current directory:
 `files.json` and `index.json`
 
-Now search the files with:
+### Prune frequent words
+
+Some words are included in many pages, so frequently that
+they are not add something to the search process. You
+can prune the words using:
+
+```
+rm pruned.json`
+node pruneindex [options...]
+```
+
+Examples:
+```
+rm pruned.json`
+node pruneindex --minlen 3 --maxcount 300
+```
+
+The above commands remove the words with length equal or less
+than 3 AND no of pages equal or greater than 300
+
+Another example:
+```
+rm pruned.json`
+node pruneindex --minlen 2
+node pruneindex  --maxcount 200
+```
+
+In this case, these commands remove the words with length equal or less
+than 2 OR no of pages equal or greater than 200.
+
+Exaple using subword:
+```
+rm pruned.json`
+node pruneindex --subword block --maxcount 200
+```
+The above command remove the words with no of pages equal or 
+greater than 200 AND containing the subword `block`.
+
+
+This prune index command adds the removed words to
+the local file `pruned.json`. It is convenient to
+remove the file before the first removal after creating
+the index (to be improved in next versions).
+
+### List index
+
+Using the command
+
+```
+node listindex [options...]
+```
+
+It list the words in the created index sorted by descending
+no of pages where the word appears.
+
+Options:
+- `-ml`, `--maxlen` `<value>`: words with lenght less or
+equal to `<value>`.
+- `-mc`, `--mincount` `<value>`: words with no of pages greater or
+equal to `<value>`.
+- `-s`, `--subword` `<value>`: words containing the subword `<value>`.
+
+Examples
+```
+node listindex
+node listindex -mc 200
+node listindex -ml 3 -mc 150
+node listindex -s block
+
+```
+
+
+### Search
+
+Search the files with:
 ```
 node search <words>...
 ```
