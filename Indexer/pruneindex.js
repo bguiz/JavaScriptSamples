@@ -4,12 +4,20 @@ const simpleargs = require('simpleargs');
 const fs = require('fs');
 
 let pruned;
+let included;
 
 try {
     pruned = require('./pruned.json');
 }
 catch (ex) {
     pruned = [];
+}
+
+try {
+    included = require('./included.json');
+}
+catch (ex) {
+    included = [];
 }
 
 simpleargs.define('ml','maxlen',0,'Maximum Length');
@@ -25,8 +33,17 @@ const subword = args.subword;
 const newindex = {};
 
 for (let word in index) {
-    if (subword && word.indexOf(subword) < 0)
+    if (subword && word.indexOf(subword) < 0) {
+        newindex[word] = index[word];
+        
         continue;
+    }
+        
+    if (included.indexOf(word) >= 0) {
+        newindex[word] = index[word];
+        
+        continue;
+    }
         
     if (maxlen && word.length <= maxlen) {
         toPrune(word);

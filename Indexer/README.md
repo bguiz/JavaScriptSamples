@@ -66,6 +66,23 @@ the local file `pruned.json`. It is convenient to
 remove the file before the first removal after creating
 the index (to be improved in next versions).
 
+If you write a file named `included.json` containing an
+array of normalized words (lowercase), these words will NOT BE
+included in the prune filter.
+
+Example, if that file contains:
+```
+["tdd", "ddd"]
+```
+
+the prune command:
+```
+node pruneindex -ml 3
+```
+
+DONT REMOVE the words `tdd` nor `ddd`.
+
+
 ### List index
 
 Using the command

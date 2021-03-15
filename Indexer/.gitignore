@@ -1,6 +1,7 @@
 files.json
 index.json
 pruned.json
+included.json
 node_modules
 *.cmd
 
