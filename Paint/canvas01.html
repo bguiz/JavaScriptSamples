@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Canvas</title>
+</head>
+<body>
+<h1>Canvas</h1>
+
+<div>
+<canvas id="mycanvas" width=1000 height=500 style="border:1px solid #d3d3d3;">
+</canvas>
+</div>
+
+<script>
+const canvas = document.getElementById('mycanvas');
+const ctx = canvas.getContext('2d');
+
+ctx.beginPath();
+ctx.fillStyle = "rgba(255,0,0,1)";
+ctx.arc(90, 90, 40, 0, Math.PI * 2, true);
+ctx.fill();
+ctx.closePath();
+
+const image_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+paintDot(200, 200);
+               
+ctx.putImageData(image_data, 0, 0);
+
+function paintDot(x, y) {
+    for (let k = 0; k < 100; k++) {
+        const x2 = x + Math.floor(Math.random(10) * 10) - 5;
+        const y2 = y + Math.floor(Math.random(10) * 10) - 5;
+        
+        const p = (canvas.width * y2 + x2) * 4;
+        image_data[p] = Math.floor(Math.random(256) * 256);
+        image_data[p + 2] = 255;
+        image_data[p + 3] = 255;
+    }
+    
+    for (let k = 0; k < image_data.length; k++) {
+        image_data[k] = 127;
+    }
+}
+
+</script>
+</body>
+</html>
