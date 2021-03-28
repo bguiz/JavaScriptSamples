@@ -1,9 +1,11 @@
 
 function List(props) {
     const { data } = props;
+    const titles = data[1];
+    const urls = data[3];
     
-    const result = data.map((entry, index) => {
-        return <li>{index}: {entry}</li>
+    const result = titles.map((entry, index) => {
+        return <li><a href={urls[index]}>{titles[index]}</a></li>
     })
 
     return <ul>{result}</ul>

@@ -4,7 +4,7 @@ import List from './List';
 import { useState } from 'react';
 
 function App() {
-  const [ data, setData ] = useState([]);
+  const [ data, setData ] = useState(['',[],[],[]]);
 
   const url =
       'https://en.wikipedia.org/w/api.php?action=opensearch&search=React&format=json&origin=*'
