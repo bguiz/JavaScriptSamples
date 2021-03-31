@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Canvas</title>
+</head>
+<body>
+<h1>Canvas</h1>
+
+<div>
+<canvas id="mycanvas" width=200 height=200 style="border:1px solid #d3d3d3;">
+</canvas>
+</div>
+
+<script>
+const canvas = document.getElementById('mycanvas');
+const ctx = canvas.getContext('2d');
+
+createCell(ctx, 200, 200, 127, 0, 0);               
+
+function createCell(context, width, height, r, g, b)
+{
+    var imagedata = context.getImageData(0, 0, width, height);
+    var data = imagedata.data;
+    
+    for (var y = 0; y < height / 2; y++)
+    {
+        var t = Math.floor(width * y / height);
+        for (var x = width / 2 - t; x < width / 2 + t; x++)
+        {
+            var k = (y * width + x) * 4;
+            data[k] = alterColorLevel(r);
+            data[k + 1] = alterColorLevel(g);
+            data[k + 2] = alterColorLevel(b);
+            data[k + 3] = 255;
+            k = ((height - y -1) * width + x) * 4;
+            data[k] = alterColorLevel(r);
+            data[k + 1] = alterColorLevel(g);
+            data[k + 2] = alterColorLevel(b);
+            data[k + 3] = 255;
+        }
+    }
+    
+    context.putImageData(imagedata, 0, 0);
+}
+
+function alterColorLevel(level)
+{
+    if (!level)
+        return level;
+        
+    return Math.floor(level*Math.random()) % 256;
+}
+
+
+</script>
+</body>
+</html>
