@@ -5,35 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello JSON RPC!</title>
     <link rel="stylesheet" href="./css/bulma.css">
+    <script type="module" src="./js/form.js"></script>
   </head>
   <body>
-<script>
-let id = 0;
-
-function doPost() {
-    const url = document.getElementById('url').value;
-    const method = document.getElementById('method').value;
-    
-    const request = {
-        id: ++id,
-        jsonrpc: "2.0",
-        method: method,
-        params: []
-    };
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },        
-        body: JSON.stringify(request)
-    })
-    .then(response => response.json())
-    .then(data => alert(JSON.stringify(data, null, 4)))
-    .catch(err => alert(err));    
-}
-</script>
   <section class="section">
     <div class="container">
       <h1 class="title">
