@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single Page Application</title>
+    <link rel="stylesheet" href="./css/bulma.css">
+  </head>
+  <body>
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="#home">
+        Home
+      </a>
+
+      <a class="navbar-item"  href="#documentation">
+        Documentation
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="#register">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-light" href="#login">
+            Sign in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <section class="section" id="section_home">
+    <div class="container">
+      <h1 class="title">
+        Home
+      </h1>
+    </div>
+  </section>
+
+  <section class="section" id="section_documentation" style="display: none">
+    <div class="container">
+      <h1 class="title">
+        Documentation
+      </h1>
+    </div>
+  </section>
+
+  <section class="section" id="section_register" style="display: none">
+    <div class="container">
+      <h1 class="title">
+        Sign up
+      </h1>
+    </div>
+  </section>
+
+  <section class="section" id="section_login" style="display: none">
+    <div class="container">
+      <h1 class="title">
+        Sign in
+      </h1>
+    </div>
+  </section>
+
+  <script>
+
+let currentPage = 'home';
+
+const pages = [ 'home', 'documentation', 'register', 'login' ];
+
+function locationHashChanged() {
+    const newPage = location.hash.substring(1);
+    
+    if (pages.indexOf(newPage) < 0)
+        return;
+        
+    const oldSection = document.getElementById('section_' + currentPage);
+    oldSection.style.display = 'none';
+    const newSection = document.getElementById('section_' + newPage);
+    newSection.style.display = 'block';
+    
+    currentPage = newPage;
+}
+
+window.onhashchange = locationHashChanged;
+
+if (location.hash && location.hash.length)
+    locationHashChanged();
+    
+  </script>
+
+</body>
+</html>
+
