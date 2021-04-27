@@ -16,7 +16,7 @@ the number of unique words.
 
 Example
 ```
-node indexer /var/myrepo md
+node indexer.js /var/myrepo md
 ```
 
 This process creates two files in current directory:
@@ -29,13 +29,13 @@ they are not add something to the search process. You
 can prune the words using:
 
 ```
-rm pruned.json`
-node pruneindex [options...]
+rm pruned.json
+node pruneindex.js [options...]
 ```
 
 Examples:
 ```
-rm pruned.json`
+rm pruned.json
 node pruneindex --minlen 3 --maxcount 300
 ```
 
@@ -44,9 +44,9 @@ than 3 AND no of pages equal or greater than 300
 
 Another example:
 ```
-rm pruned.json`
-node pruneindex --minlen 2
-node pruneindex  --maxcount 200
+rm pruned.json
+node pruneindex.js --minlen 2
+node pruneindex.js --maxcount 200
 ```
 
 In this case, these commands remove the words with length equal or less
@@ -54,10 +54,10 @@ than 2 OR no of pages equal or greater than 200.
 
 Exaple using subword:
 ```
-rm pruned.json`
-node pruneindex --subword block --maxcount 200
+rm pruned.json
+node pruneindex.js --subword block --maxcount 200
 ```
-The above command remove the words with no of pages equal or 
+The above command remove the words with no of pages equal or
 greater than 200 AND containing the subword `block`.
 
 
@@ -77,7 +77,7 @@ Example, if that file contains:
 
 the prune command:
 ```
-node pruneindex -ml 3
+node pruneindex.js -ml 3
 ```
 
 DONT REMOVE the words `tdd` nor `ddd`.
@@ -88,7 +88,7 @@ DONT REMOVE the words `tdd` nor `ddd`.
 Using the command
 
 ```
-node listindex [options...]
+node listindex.js [options...]
 ```
 
 It list the words in the created index sorted by descending
@@ -103,10 +103,10 @@ equal to `<value>`.
 
 Examples
 ```
-node listindex
-node listindex -mc 200
-node listindex -ml 3 -mc 150
-node listindex -s block
+node listindex.js
+node listindex.js -mc 200
+node listindex.js -ml 3 -mc 150
+node listindex.js -s block
 
 ```
 
@@ -115,12 +115,12 @@ node listindex -s block
 
 Search the files with:
 ```
-node search <words>...
+node search.js <words>...
 ```
 
 Example
 ```
-node search block transaction
+node search.js block transaction
 ```
 
 The list of files containing ALL the words will be listed.
@@ -134,4 +134,3 @@ The first ones have more occurrences of the words combination
 - [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 - [Multiline strings in ES6 JavaScript](https://jack.ofspades.com/multiline-strings-in-es6-javascript/)
 - [Improvements by bguiz](https://github.com/bguiz/JavaScriptSamples/blob/feat/bguiz-indexer-improvements/Indexer/README.md)
-
