@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-function processFiles(dirpath, extension, prefix, subdirs, fn) {
+function processFiles(dirpath, extension, prefix, subdirs, fn, currentRelativeDir = '') {
     const filenames = fs.readdirSync(dirpath);
     const l = filenames.length;
 
@@ -29,17 +29,18 @@ function processFiles(dirpath, extension, prefix, subdirs, fn) {
         if (stat.isDirectory()) {
             const newprefix = prefix ? path.join(prefix, filename) : filename;
             const newdirpath = path.join(dirpath, filename);
+            const nextRelativeDir = path.join(currentRelativeDir, filename);
             let shouldRecur;
             if (subdirs.length > 0) {
                 shouldRecur = subdirs.filter((subdir) => (
-                    // recursively track subdir/ this is more of a brute force approach
-                    newdirpath.indexOf(subdir) >= 0
+                    (subdir.startsWith(nextRelativeDir)) ||
+                    (nextRelativeDir.startsWith(subdir))
                 )).length > 0;
             } else {
                 shouldRecur = true;
             }
             if (shouldRecur) {
-                processFiles(newdirpath, extension, newprefix, subdirs, fn);
+                processFiles(newdirpath, extension, newprefix, subdirs, fn, nextRelativeDir);
             }
         }
     }
