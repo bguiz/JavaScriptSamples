@@ -40,17 +40,18 @@ files.processFiles(dirpath, extension, null, subdirs,
             file.t = title;
         else if (header)
             file.t = header;
+        file.t = stripOuterQuotes(file.t);
 
         if (summary)
             file.d = summary;
         else if (description)
             file.d = description;
+        file.d = stripOuterQuotes(file.d);
+        if (file.d)
+            file.d.replace(/\n/g, ' ');
 
         if (tags)
-            if (file.d)
-                file.d += ' ' + tags;
-            else
-                file.d = tags;
+            file.d = (file.d || '') + '\n' + tags;
 
         if (permalink)
             file.l = permalink;
@@ -61,6 +62,23 @@ files.processFiles(dirpath, extension, null, subdirs,
 
         words.collectWords(result, cwords, filesdes.length - 1);
     });
+
+function stripOuterQuotes(str) {
+    if (typeof str !== 'string') {
+        return str;
+    }
+    const lastCharIdx = str.length - 1;
+    if (
+          (str.charAt(0) === "'" &&
+          str.charAt(lastCharIdx) === "'") ||
+          (str.charAt(0) === '"' &&
+          str.charAt(lastCharIdx) === '"')
+    ) {
+        return str.slice(1, lastCharIdx);
+    } else {
+        return str;
+    }
+}
 
 fs.writeFileSync('files.json', JSON.stringify(filesdes));
 fs.writeFileSync('index.json', JSON.stringify(result));
